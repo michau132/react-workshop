@@ -1,0 +1,88 @@
+.main-app__users-row {
+    width: 20%;
+    background-color: #4d394b;
+    text-align: left;
+    border-right: 3px solid black;
+    color: #fff;
+    padding-left: 18px;
+    max-height: 88vh;
+    overflow-y: scroll;
+}
+.main-app__users-row button {
+    padding: 8px;
+    border: none;
+    background: #4593e3;
+    color: #fff;
+    margin: 12px 0;
+    transition: 0.5s all;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.main-app__users-row button:hover {
+    background-color: transparent;
+    color: rgb(184,176,183);
+}
+.main-app__users-row button:focus {
+    outline: none;
+}
+.main-app__users-row input {
+    border: none;
+    padding: 8px;
+    background-color: transparent;
+    margin-bottom: 15px;
+    border-bottom: 1px solid grey;
+    color: #fff;
+}
+.main-app__users-row input:focus {
+    outline: none;
+}
+.main-app__users-row input::placeholder {
+    color: #fff;
+    font-size: 1rem;
+}
+.main-app__users-row img {
+    display: inline-block;
+    margin-right: 8px;
+    border-radius: 50%;
+    text-align: left;
+    margin-bottom: 6px;
+}
+.main-app__users-row h3 {
+    display: inline-block;
+    transform: translateY(-100%);
+
+}
+.main-app__users-row h6 {
+    margin-bottom: 6px;
+}
+.main-app__users-row p {
+    margin-bottom: 20px;
+}
+.users-row__user {
+    cursor: pointer;
+}
+.users-row__user:hover {
+    color: rgb(184,176,183);
+    background-color: #3e313c;
+}
+
+.main-app__users-row::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.main-app__users-row::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.main-app__users-row::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #6D3967;
+}

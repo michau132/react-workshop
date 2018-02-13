@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import ProductTile from './contact';
+import './App.css';
 
-const styl = {
-    textAlign: 'center',
-    border: '1px solid black',
-    background: 'grey',
-    width: '50%',
-    margin: '0 auto'
-}
+
 let newContacts, contacts;
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.handler = this.handler.bind(this)
         this.state = {
             searchQr: '',
             direction: 1,
-            users: []
+            users: [],
+            userCnt: []
         }
     }
     firstLetter(text) {
@@ -26,45 +23,32 @@ class App extends Component {
             .then(response => response.json())
             .then(data => { contacts = data.results;
             contacts.map( contact => {
-                contact.name.first = this.firstLetter(contact.name.first)
-                contact.name.last = this.firstLetter(contact.name.last)
+                contact.name.first = this.firstLetter( contact.name.first )
+                contact.name.last = this.firstLetter( contact.name.last )
             })
 
-                this.setState({ users: contacts}) });
+                this.setState({ users: contacts }) });
     }
-    filter =(event) => {
+    filter =( event ) => {
 
         this.setState({
             searchQr: event.target.value,
-            users: contacts.filter(item => {
-                return item.name.first.match(event.target.value) ||
-                    item.name.last.match(event.target.value) ||
-                    item.email.match(event.target.value)
+            users: contacts.filter( item => {
+                return item.name.first.match( event.target.value ) ||
+                    item.name.last.match( event.target.value ) ||
+                    item.email.match( event.target.value )
             })
         })
     }
-    sortAlphabeticByFirstName =() => {
 
-        newContacts = this.state.users.map( item => item);
-
-        newContacts.sort((a, b) => {
-            if(a.name.first < b.name.first) return (-1 * this.state.direction);
-            if(a.name.first > b.name.first) return this.state.direction;
-            return 0;
-        });
-        this.setState({
-            users: newContacts,
-            direction: this.state.direction * -1
-        })
-    }
 
     sortAlphabeticByLastName =() => {
 
         newContacts = this.state.users.map( item => item);
 
-        newContacts.sort((a, b) => {
-            if(a.name.last < b.name.last) return (-1 * this.state.direction);
-            if(a.name.last > b.name.last) return this.state.direction;
+        newContacts.sort( ( a , b ) => {
+            if( a.name.last < b.name.last ) return ( -1 * this.state.direction);
+            if( a.name.last > b.name.last ) return this.state.direction;
             return 0;
         });
         this.setState({
@@ -75,16 +59,32 @@ class App extends Component {
 
     render() {
         return (
-            <section style={styl}>
-                <h1>Contacts</h1>
-                { this.state.users.map((contact, i) =>
-                    <ProductTile key={ i }
-                                 item={ contact }
-                    />
-                ) }
-                <input type="text" placeholder={'type a name'} onKeyUp={this.filter}/>
-                <button onClick={this.sortAlphabeticByFirstName}>Sort by name</button>
-                <button onClick={this.sortAlphabeticByLastName}>Sort by last name</button>
+            <section className={'main-app'}>
+                <header className={'main-app__header'}>
+                    <h2>Contacts</h2>
+                </header>
+                <div className={'main-app__users-row'}>
+                    <button onClick={ this.sortAlphabeticByLastName }>Sort by last name</button>
+                    <input type="text" placeholder={'type a name'} onKeyUp={ this.filter }/>
+                    { this.state.users.map(( contact , i ) =>
+                        <ProductTile key={ i }
+                                     item={ contact }
+                        />
+                    ) }
+                </div>
+                <div className={'main-app__main-section'}>
+                    {
+                        this.state.userCnt.map(( item, i ) => {
+                            return (
+                                <div>
+                                    <img src={ item.picture.thumbnail } alt=""/>
+
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
             </section>
         )
     }
